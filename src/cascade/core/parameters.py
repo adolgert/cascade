@@ -1,3 +1,7 @@
+from cascade.core.log import getLoggers
+CODELOG, MATHLOG = getLoggers(__name__)
+
+
 class _ParameterHierarchy:
     """An immutable store which gives dot notation access to hierarchical key-value data
     """
@@ -7,7 +11,6 @@ class _ParameterHierarchy:
             if isinstance(value, dict):
                 value = _ParameterHierarchy(**value)
             setattr(self, key, value)
-        self._frozen = True
 
     def __setattr__(self, key, value):
         if hasattr(self, "_frozen") and self._frozen:
